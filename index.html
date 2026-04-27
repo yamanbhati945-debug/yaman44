@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Prachi ✨</title>
+    <!-- Google Fonts for a cute and premium look -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-pink: #ff758c;
+            --secondary-pink: #ff7eb3;
+            --light-pink: #ffe6ea;
+            --bg-color: #fdf2f4;
+            --text-dark: #5a3e44;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--light-pink) 0%, #ffffff 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Falling Hearts Animation */
+        .heart-fall {
+            position: fixed;
+            top: -10vh;
+            font-size: 1.5rem;
+            animation: fall linear forwards;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+
+        /* Premium Card Container */
+        .card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 117, 140, 0.15);
+            padding: 30px;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Header Animations */
+        .glow-heading {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.2rem;
+            color: var(--primary-pink);
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 117, 140, 0.4), 0 0 20px rgba(255, 126, 179, 0.2);
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 10px rgba(255, 117, 140, 0.4); }
+            to { text-shadow: 0 0 20px rgba(255, 117, 140, 0.8), 0 0 30px rgba(255, 126, 179, 0.6); }
+        }
+
+        .typing-container {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary-pink);
+            min-height: 35px;
+            margin-bottom: 20px;
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            background: var(--light-pink);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-box span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-pink);
+        }
+
+        .time-box small {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Slideshow */
+        .slideshow-container {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+            aspect-ratio: 4/3;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            animation: fade 1.5s;
+        }
+
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+
+        /* Message Section */
+        .message {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin: 25px 0;
+            text-align: justify;
+            color: #555;
+        }
+
+        .message p { margin-bottom: 15px; }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.5);
+        }
+
+        /* Welcome Screen (To enable audio playback) */
+        #welcome-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #fff0f3, #ffe6ea);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Popup Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 80%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Welcome Screen to Start Experience & Audio -->
+    <div id="welcome-screen">
+        <h1 class="glow-heading" style="margin-bottom: 30px;">A Special Surprise for You 🎁</h1>
+        <button class="btn" onclick="startExperience()">Tap to Open ✨</button>
+    </div>
+
+    <!-- Main Card -->
+    <div class="card">
+        
+        <h1 class="glow-heading">🎂 Happy Birthday ✨</h1>
+        <div class="typing-container" id="typing-text"></div>
+
+        <!-- Countdown Timer -->
+        <div style="font-size: 0.9rem; margin-top: 10px; color: var(--primary-pink); font-weight: bold;">Countdown to 30th April 🎉</div>
+        <div class="countdown">
+            <div class="time-box"><span id="days">00</span><small>Days</small></div>
+            <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+            <div class="time-box"><span id="mins">00</span><small>Mins</small></div>
+            <div class="time-box"><span id="secs">00</span><small>Secs</small></div>
+        </div>
+
+        <!-- Photos Slideshow -->
+        <div class="slideshow-container">
+            <img src="photo1.jpg" alt="Prachi 1" class="slide">
+            <img src="photo2.jpg" alt="Prachi 2" class="slide">
+            <img src="photo3.jpg" alt="Prachi 3" class="slide">
+        </div>
+
+        <!-- Main Emotional Message -->
+        <div class="message">
+            <p>Hey, happy birthday ❤️🎂✨</p>
+            <p>You are the most special person in my life, and truly the most beautiful soul i ever met 💫 I don’t think I can ever fully express what you mean to me. Just seeing you smile is enough to make my whole day better 😊 Your smile means more to me than words can explain 💖</p>
+            <p>On your special day, I wish you all the happiness in the world 🌍🎉 May all your wishes come true, and may your life be filled with beautiful moments ✨ Whatever you go through in life, I hope you always achieve your dreams and stay strong 💪🌸</p>
+            <p>You are the one who makes me smile, and your happiness matters a lot to me 🥺💗 So please, always stay happy and keep smiling… because your smile is what keeps me going 😊❤️</p>
+            <p>I’ll always try my best to make you happy 💞 Enjoy your day to the fullest 🎈🎁 Happy birthday once again… and please, never remove me from your life 🤍</p>
+        </div>
+
+        <!-- Interactive Buttons -->
+        <div class="btn-container">
+            <button class="btn" onclick="cutCake()">🎂 Cut the Cake</button>
+            <button class="btn" onclick="openSurprise()">🎁 Surprise</button>
+        </div>
+
+    </div>
+
+    <!-- Surprise Popup Modal -->
+    <div class="modal-overlay" id="surprise-modal">
+        <div class="modal-content">
+            <h2 style="color: var(--primary-pink); margin-bottom: 15px;">Surprise! 🎊</h2>
+            <p style="margin-bottom: 20px;">You are the sweetest, most amazing best friend anyone could ever ask for! I hope you have the best birthday ever! 🥳✨</p>
+            <button class="btn" onclick="closeSurprise()" style="margin: 0 auto;">Close ❤️</button>
+        </div>
+    </div>
+
+    <!-- Scripts for Logic and Animations -->
+    <script>
+        // 1. Start Experience (Removes Welcome Screen & Plays Music)
+        function startExperience() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            let music = document.getElementById('bg-music');
+            music.volume = 0.5; // Soft background volume
+            music.play().catch(e => console.log("Audio play blocked by browser."));
+            typeWriter();
+            setInterval(createHeart, 400); // Start falling hearts
+        }
+
+        // 2. Typing Animation
+        const textToType = "Prachi ❤️";
+        let typeIndex = 0;
+        function typeWriter() {
+            if (typeIndex < textToType.length) {
+                document.getElementById("typing-text").innerHTML += textToType.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(typeWriter, 150);
+            }
+        }
+
+        // 3. Falling Hearts Animation
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart-fall");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 3) + "s"; // between 3 and 6 seconds
+            
+            // Randomly use different sweet emojis sometimes
+            const emojis = ["❤️", "✨", "🌸", "💖"];
+            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // 4. Countdown Timer to 30 April
+        function setupCountdown() {
+            let currentYear = new Date().getFullYear();
+            // Month is 0-indexed in JS (3 = April)
+            let targetDate = new Date(currentYear, 3, 30, 0, 0, 0).getTime(); 
+
+            // If April 30 has passed this year, count down to next year
+            if (new Date().getTime() > targetDate) {
+                targetDate = new Date(currentYear + 1, 3, 30, 0, 0, 0).getTime();
+            }
+
+            setInterval(function() {
+                let now = new Date().getTime();
+                let distance = targetDate - now;
+
+                let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Add leading zeros
+                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById("mins").innerText = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("secs").innerText = seconds < 10 ? "0" + seconds : seconds;
+            }, 1000);
+        }
+        setupCountdown();
+
+        // 5. Slideshow
+        let slideIndex = 0;
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+        showSlides();
+
+        // 6. Button Actions
+        function cutCake() {
+            alert("Yay! You cut the cake! 🍰 Sending you the biggest, sweetest virtual slice! 🎉 Have the best day ever!");
+        }
+
+        function openSurprise() {
+            document.getElementById("surprise-modal").style.display = "flex";
+            // Extra burst of hearts
+            for(let i=0; i<15; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+        function closeSurprise() {
+            document.getElementById("surprise-modal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
